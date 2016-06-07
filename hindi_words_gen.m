@@ -8,11 +8,8 @@ function hindi_words_gen(text_file_source,dest_loc_name,dest_label_loc,font_file
 % dest_label_loc   -> loacation where labels are to be stored
 
 
-%fod=fopen(text_file_source,'r');
 ffd=fopen(font_file_source,'r');
-%current_para= textscan(fod, '%s');
 
-%l=size(current_para{1});
 while ~feof(ffd)
 fonts = fgetl(ffd);
 	k=0;
@@ -21,13 +18,11 @@ fonts = fgetl(ffd);
 	directory=sprintf('%s\\',dest_loc_name);
 	mkdir(directory);
 	
-	%directory=sprintf('%s\\%s\\',dest_loc_name,fonts);
-	%mkdir(sprintf('%s\\%s\\',dest_loc_name,fonts));
+	
 while ~feof(fod)
 	current_para=fgetl(fod);
 	k=k+1;
 	tt=current_para;
-	% 'convert -background '+background+' -fill '+color+' -pointsize '+size+' label'+':'+name+' '+file_name+'.gif'
 	syscmd = sprintf('convert -background white -fill black -font %s -pointsize 120 label:%s %s%s_W2#%d.pbm',fonts,tt,directory,fonts,k);
 	
 	label_dir=sprintf('%s\\',dest_label_loc);
@@ -37,9 +32,7 @@ while ~feof(fod)
 		fprintf(fwd,'%s',tt);
 		fclose(fwd);
 	end
-	%syscmd = sprintf('convert -background white -fill black -font DevLys-310 -interword-spacing 25 -size 320x100 -gravity Center -pointsize 30 label:%s %s.gif',text,file_name);
-    %disp(syscmd);
-	%system(syscmd);
+
 end
 fclose(fod);
 end
